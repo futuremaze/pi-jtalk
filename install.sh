@@ -11,16 +11,15 @@ cd $(dirname $0)
 
 # グローバル定数
 readonly INSTALL_DIR="/usr/share/pi-jtalk"
-readonly TEMP_DIR="$(mktemp -d pi-jtalk.XXXXXXXX)"
+readonly MMDAGENT_URL="https://sourceforge.net/projects/mmdagent/files/MMDAgent_Example/MMDAgent_Example-1.7"
+readonly MMDAGENT_FILENAME="MMDAgent_Example-1.7.zip "
 
 #
 # 関数定義
 #
 
 function cleanup() {
-  if [[ -n "$TEMPFILE" && -e "$TEMPFILE" ]]; then
-    mv -n "$TEMPFILE" ~/.trash/  # 消さずにゴミ箱フォルダに移動
-  fi
+  rm -rf ./MMDAgent*
 }
 
 function main() {
@@ -31,10 +30,8 @@ function main() {
     hts-voice-nitech-jp-atr503-m001
 
   # 音響モデル(mei)のダウンロード
-  wget https://sourceforge.net/projects/mmdagent/files/MMDAgent_Example/MMDAgent_Example-1.7/MMDAgent_Example-1.7.zip \
-    --no-check-certificate \
-    -o ${TEMP_DIR}/MMDAgent_Example-1.7.zip
-  cd ${TEMP_DIR}
+  wget ${MMDAGENT_URL}/${MMDAGENT_FILENAME} \
+    --no-check-certificate
   unzip MMDAgent_Example-1.7.zip
   sudo cp -R ./MMDAgent_Example-1.7/Voice/mei /usr/share/hts-voice/
 
@@ -43,6 +40,9 @@ function main() {
   sudo cp -R ./bin ${INSTALL_DIR}/
   sudo chmod 755 ${INSTALL_DIR}/bin/*.sh
 }
+
+# EXIT時にcleanup実行
+trap cleanup EXIT
 
 # エントリー処理
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
