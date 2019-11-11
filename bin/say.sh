@@ -58,5 +58,6 @@ trap cleanup EXIT
 
 # エントリー処理
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  parse_args "$@"
   main
 fi
