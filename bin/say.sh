@@ -47,6 +47,7 @@ function main() {
   local TEMPFILE=$(tempfile)
   local option="-m /usr/share/hts-voice/mei/mei_normal.htsvoice \
                 -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
+                -r 0.8 \
                 -ow $TEMPFILE"
  
   echo "${CONTENT}" | open_jtalk $option
