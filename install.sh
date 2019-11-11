@@ -39,6 +39,7 @@ function main() {
   sudo mkdir -p ${INSTALL_DIR}
   sudo cp -R ./bin ${INSTALL_DIR}/
   sudo chmod 755 ${INSTALL_DIR}/bin/*.sh
+  sudo cp -R ./wav ${INSTALL_DIR}/
 }
 
 # EXIT時にcleanup実行
