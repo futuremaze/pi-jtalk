@@ -33,7 +33,7 @@ function main() {
   # 音響モデル(mei)のダウンロード
   wget https://sourceforge.net/projects/mmdagent/files/MMDAgent_Example/MMDAgent_Example-1.7/MMDAgent_Example-1.7.zip \
     --no-check-certificate \
-    -o ${TEMP_DIR}
+    -o ${TEMP_DIR}/MMDAgent_Example-1.7.zip
   cd ${TEMP_DIR}
   unzip MMDAgent_Example-1.7.zip
   sudo cp -R ./MMDAgent_Example-1.7/Voice/mei /usr/share/hts-voice/
